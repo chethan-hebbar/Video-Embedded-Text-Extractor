@@ -1,17 +1,42 @@
 import cv2 
+import numpy as np 
+import os 
 import pytesseract
 
-img = cv2.imread("images/example3.png")
+video = cv2.VideoCapture("videos/sample.mp4")
 
-cv2.imshow("anti life", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+video_available = 1
+frame_count = 0
 
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+while video_available:
 
-cv2.imshow("anti life", img_rgb)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+    video_available, frame = video.read()
+    # converting to grayscale
+    frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-text = pytesseract.image_to_string(img_rgb)
-print(text)
+    # binary 
+    binary_frame = cv2.threshold(frame_gray ,130,255,cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+
+    #inversion
+    inverted_frame = cv2.bitwise_not(binary_frame)
+
+    if frame_count == 0:
+        previous_text = ""
+    
+    else:
+        previous_text = extracted_text
+
+    extracted_text = pytesseract.image_to_string(frame_gray)
+
+    if(extracted_text == "" or extracted_text == previous_text):
+        frame_count += 1
+        continue
+
+    else:
+        extracted_set = set(extracted_text.split())
+        previous_set = set(previous_text.split())
+
+        if(len(extracted_set.difference(previous_set)) > 4):
+            print("Frame number: {}".format(frame_count))
+            frame_count += 1
+            print(extracted_text)
