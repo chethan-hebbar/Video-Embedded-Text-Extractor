@@ -1,9 +1,13 @@
 # OffNoteLabs_Task1_Vision
 # Embedded-text extractor from videos
-* Video Link: https://www.youtube.com/watch?v=9ezzpuOqkX4
-* extractor.py :: contains the code for the video extractor
+* Video Link:: https://www.youtube.com/watch?v=9ezzpuOqkX4
+* images:: contains the test images
+* videos:: contains videos to be used
+* outputs:: contains output file "result.txt" containing extractor outputs and cmd line outputs for test.py
+* papers:: contains reference papers and report .odt file
+* **extractor.py :: contains the code for the video extractor**
 * test.py :: contains the code to test the preprocessing on images, to give best results using tesseract-ocr
-* results.txt :: contains the output of the extractor with frame number for every embedded-text detection
+* **report.pdf:: contains answers to follow-up mail**
 
 # Analysis of the results from "results.txt"
 * **The first five instances of embedded text has been identified with great accuracy(with no need for wrong results on mutliple frames)** 
