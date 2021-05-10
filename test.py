@@ -3,7 +3,7 @@ import numpy as np
 import os 
 import pytesseract
 
-frame = cv2.imread("images/sample.png")
+frame = cv2.imread("images/sample11.png")
 
 # converting to grayscale
 frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
